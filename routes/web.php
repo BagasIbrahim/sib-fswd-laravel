@@ -43,8 +43,8 @@ Route::get('/conflict/{nama}', function ($namaItem) {
 
 Route::get('/produk', [ItemController::class, 'items']);
 
-// Route::get('/pengguna', [UserController::class, 'users']);
+Route::get('/pengguna', [UserController::class, 'users']);
 
-// Route::get('/pengguna/formtambah', [UserController::class, 'formtambah']);
+Route::get('/pengguna/formtambah', [UserController::class, 'formtambah']);
 
-// Route::post('/pengguna/create', [UserController::class, 'create']);
+Route::post('/pengguna/create', [UserController::class, 'create']);
