@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProdukController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +19,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('/DashboardPage/dashboard');
+});
+
+Route::get('/daftarpengguna', function () {
+    return view('/DashboardPage/d_pengguna');
+});
+
+Route::get('/daftarproduk', function () {
+    return view('/DashboardPage/d_produk');
 });
 
 Route::get('/hello', function () {
@@ -41,10 +55,18 @@ Route::get('/conflict/{nama}', function ($namaItem) {
     return "Item yang dicari adalah " . $namaItem;
 });
 
-Route::get('/produk', [ItemController::class, 'items']);
+// Route::get('/produk', [ItemController::class, 'items']);
 
-Route::get('/pengguna', [UserController::class, 'users']);
+Route::get('/', [ProductController::class, 'index']);
 
-Route::get('/pengguna/formtambah', [UserController::class, 'formtambah']);
+Route::get('/pengguna', [UserController::class, 'index']);
 
-Route::post('/pengguna/create', [UserController::class, 'create']);
+Route::get('/pengguna/formtambah', [UserController::class, 'create']);
+
+Route::post('/pengguna/create', [UserController::class, 'store']);
+
+Route::get('/pengguna/formedit/{id}', [UserController::class, 'edit']);
+
+Route::post('/pengguna/update', [UserController::class, 'update']);
+
+Route::get('/pengguna/hapus/{id}', [UserController::class, 'destroy']);
