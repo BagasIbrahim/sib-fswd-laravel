@@ -3,10 +3,8 @@
 
 <head>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+    <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/dataTables.bootstrap5.min.css')}}"/>
     <title>Daftar Pengguna</title>
 </head>
 
@@ -18,44 +16,49 @@
         <a href="users_logout.php" class="mx-2 btn btn-danger">Log Out</a>
     </div><br>
 
-    <table id="myTable">
-
-        <thead>
-            <th>No</th>
-            <th>Avatar</th>
-            <th>Nama</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Role</th>
-            <th>Aksi</th>
-        </thead>
-        <tbody>
-            @foreach($users as $u)
-                <tr>
-                    <td>{{$u->id}}</td>
-                    <td>{{$u->avatar}}</td>
-                    <td>{{$u->name}}</td>
-                    <td>{{$u->email}}</td>
-                    <td>{{$u->phone}}</td>
-                    <td>{{$u->role}}</td>
-                    <td class="actions">
-                        <a href="users_update.php?id={{$u->id}}" class="mx-1 btn btn-success"><i class="fas fa-pen fa-xs"></i></a>
-                        <a href="users_delete.php?id={{$u->id}}" class="mx-1 btn btn-danger"><i class="fas fa-trash fa-xs"></i></a>
-                    </td>
-                </tr>
-
-            @endforeach
-
-        </tbody>
-
-    </table>
-
+        <div class="table-responsive mx-2">
+            <table class="table table-striped" id="dataTable" width="100%">
+    
+                <thead>
+                    <th>No</th>
+                    <th>Avatar</th>
+                    <th>Nama</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Role</th>
+                    <th>Aksi</th>
+                </thead>
+                <tbody>
+                    @foreach($users as $u)
+                        <tr>
+                            <td>{{$u->id}}</td>
+                            <td>{{$u->avatar}}</td>
+                            <td>{{$u->name}}</td>
+                            <td>{{$u->email}}</td>
+                            <td>{{$u->phone}}</td>
+                            <td>{{$u->role}}</td>
+                            <td class="actions">
+                                <a href="/pengguna/formedit/{{$u->id}}" class="mx-1 btn btn-success"><i class="fas fa-pen fa-xs"></i></a>
+                                <a href="/pengguna/hapus/{{$u->id}}" class="mx-1 btn btn-danger"><i class="fas fa-trash fa-xs"></i></a>
+                            </td>
+                        </tr>
+        
+                    @endforeach
+        
+                </tbody>
+        
+            </table>
+        </div>
 
 </body>
 
+<script src="{{asset('vendor/bootstrap/javascript/jquery.min.js')}}"></script>
+<script src="{{asset('vendor/bootstrap/javascript/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('vendor/bootstrap/javascript/dataTables.bootstrap5.min.js')}}"></script>
+
 <script>
     $(document).ready(function() {
-        $('#myTable').DataTable();
+        $('#dataTable').DataTable();
     });
 </script>
 
