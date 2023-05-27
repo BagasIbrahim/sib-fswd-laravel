@@ -14,18 +14,18 @@
         <header class="d-flex justify-content-between my-4">
             <h1>Edit Pengguna</h1>
             <div>
-                <a href="/pengguna" class="btn btn-primary">Kembali</a>
+                <a href="/daftarpengguna" class="btn btn-primary">Kembali</a>
             </div>
         </header>
 
         @foreach($users as $u)
-                <form class="row g-3" action="/pengguna/update" method="post">
+                <form class="row g-3" action="/daftarpengguna/update" method="post">
                     @csrf
                     <input type="hidden" name="id" value="{{$u->id}}">
 
                     <div class="col-12">
                         <label for="name" class="form-label">Nama</label>
-                        <input type="text" class="form-control" value="{{$u->name}}" id="name" name="name" placeholder="Nama Lengkap">
+                        <input type="text" class="form-control" value="{{$u->name_user}}" id="name" name="name" placeholder="Nama Lengkap">
                     </div>
                     <div class="col-md-6">
                         <label for="role" class="form-label">Role</label>

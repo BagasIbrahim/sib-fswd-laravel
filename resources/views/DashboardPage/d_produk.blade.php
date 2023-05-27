@@ -201,6 +201,10 @@
                         <div class="card-header py-3">
                             <h4 class="m-0 font-weight-bold text-primary">Data Tabel Produk</h4>
                         </div>
+
+                        <div>
+                            <a href="/daftarproduk/formtambah" class="my-2 mx-3 btn btn-primary">Tambah Pengguna</a>
+                        </div><br>
                          
                         <div class="card-body">
                             <div class="table-responsive mx-2">
@@ -213,16 +217,22 @@
                                         <th>Description</th>
                                         <th>Price</th>
                                         <th>Status</th>
+                                        <th>Aksi</th>
                                     </thead>
                                     <tbody>
                                         @foreach($products as $p)
                                             <tr>
                                                 <td>{{$p->id}}</td>
-                                                <td>{{$p->category_id}}</td>
-                                                <td>{{$p->name}}</td>
+                                                <td>{{$p->name_category}}</td>
+                                                <td>{{$p->name_product}}</td>
                                                 <td>{{$p->description}}</td>
                                                 <td>{{$p->price}}</td>
                                                 <td>{{$p->status}}</td>
+                                                <td class="actions">
+                                                    <a href="/daftarproduk/detail/{{$p->id}}" class="btn btn-primary btn-sm"><i class="fas fa-info-circle fa-xs"></i></a>
+                                                    <a href="/daftarproduk/formedit/{{$p->id}}" class="btn btn-success btn-sm"><i class="fas fa-pen fa-xs"></i></a>
+                                                    <a href="/daftarproduk/hapus/{{$p->id}}" class="btn btn-danger btn-sm"><i class="fas fa-trash fa-xs"></i></a>
+                                                </td>
                                             </tr>
                             
                                         @endforeach

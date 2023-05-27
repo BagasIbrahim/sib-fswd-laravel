@@ -33,11 +33,12 @@
                         <tr>
                             <td>{{$u->id}}</td>
                             <td>{{$u->avatar}}</td>
-                            <td>{{$u->name}}</td>
+                            <td>{{$u->name_user}}</td>
                             <td>{{$u->email}}</td>
                             <td>{{$u->phone}}</td>
                             <td>{{$u->role}}</td>
                             <td class="actions">
+                                <a href="/pengguna/detail/{{$u->id}}" class="mx-1 btn btn-primary"><i class="fas fa-info-circle fa-xs"></i></a>
                                 <a href="/pengguna/formedit/{{$u->id}}" class="mx-1 btn btn-success"><i class="fas fa-pen fa-xs"></i></a>
                                 <a href="/pengguna/hapus/{{$u->id}}" class="mx-1 btn btn-danger"><i class="fas fa-trash fa-xs"></i></a>
                             </td>

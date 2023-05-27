@@ -15,11 +15,11 @@
         <header class="d-flex justify-content-between my-4">
             <h1>Tambah Pengguna</h1>
             <div>
-                <a href="/pengguna" class="btn btn-primary">Kembali</a>
+                <a href="/daftarpengguna" class="btn btn-primary">Kembali</a>
             </div>
         </header>
 
-    <form class="row g-3" action="/pengguna/create" method="post">
+    <form class="row g-3" action="/daftarpengguna/create" method="post">
         @csrf
         <div class="col-12">
             <label for="name" class="form-label">Nama</label>
