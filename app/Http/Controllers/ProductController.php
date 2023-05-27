@@ -15,10 +15,12 @@ class ProductController extends Controller
     public function index()
     {
 
-        $prducts = DB::table('categories')
-        ->join('products', 'products.category_id', '=', 'categories.id')
+        $products = DB::table('products')
+        ->join('categories', 'categories.id', '=', 'products.category_id')
+        // ->select('products.id', 'category_id AS categories.name_category', 'products.name_product', 'products.description', 'products.price', 'products.status')
         ->get();
-        return view('/welcome', ['products' => $prducts]);
+        // dd($products);
+        return view('/welcome', ['products' => $products]);
     }
 
     /**
@@ -28,7 +30,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view ('/TableProduk/formtambah');
+
     }
 
     /**
@@ -37,9 +40,22 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $products)
     {
-        //
+        // 
+        // insert data ke table users
+        DB::table('products')->insert([
+            'category_id' => $products->category_id,
+            'name_product' => $products->name_product,
+            'description' => $products->description,
+            'price' => $products->price,
+            'status' => $products->status,
+            'created_by' => $products->created_by,
+            'verified_by' => $products->verified_by
+        ]);
+
+        // alihkan halaman ke halaman produk
+        return redirect('daftarproduk');
     }
 
     /**
@@ -50,7 +66,10 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        // mengambil data produk berdasarkan id yang dipilih
+        $products = DB::table('products')->where('id', $id)->get();
+        // passing data produk yang didapat ke view detail.blade.php
+        return view('/TableProduk/detail', ['products' => $products]);
     }
 
     /**
@@ -61,7 +80,10 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        // mengambil data produk berdasarkan id yang dipilih
+        $products = DB::table('products')->where('id', $id)->get();
+        // passing data produk yang didapat ke view edit.blade.php
+        return view('/TableProduk/formedit', ['products' => $products]);
     }
 
     /**
@@ -71,9 +93,20 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $products)
     {
-        //
+        // update data produk
+        DB::table('products')->where('id', $products->id)->update([
+            'category_id' => $products->category_id,
+            'name_product' => $products->name_product,
+            'description' => $products->description,
+            'price' => $products->price,
+            'status' => $products->status,
+            'created_by' => $products->created_by,
+            'verified_by' => $products->verified_by
+        ]);
+        // alihkan halaman ke halaman produk
+        return redirect('daftarproduk');
     }
 
     /**
@@ -84,6 +117,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // menghapus data produk berdasarkan id yang dipilih
+        DB::table('products')->where('id', $id)->delete();
+        // alihkan halaman ke halaman produk
+        return redirect('daftarproduk');
     }
 }
