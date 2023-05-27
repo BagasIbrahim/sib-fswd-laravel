@@ -31,11 +31,12 @@ class ComposerServiceProvider extends ServiceProvider
             $view->with('users', $users);
         });
 
-        $prducts = DB::table('categories')
-        ->join('products', 'products.category_id', '=', 'categories.id')
+        $products = DB::table('products')
+        ->join('categories', 'categories.id', '=', 'products.category_id')
+        ->select('products.id', 'category_id as name_category', 'products.name_product', 'products.description', 'products.price', 'products.status')
         ->get();
-        view()->composer(['/welcome', '/DashboardPage/d_produk'], function ($view) use ($prducts) {
-            $view->with('products', $prducts);
+        view()->composer(['/welcome', '/DashboardPage/d_produk'], function ($view) use ($products) {
+            $view->with('products', $products);
         });
     }
 }
