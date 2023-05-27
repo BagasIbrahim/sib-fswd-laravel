@@ -59,14 +59,20 @@ Route::get('/conflict/{nama}', function ($namaItem) {
 
 Route::get('/', [ProductController::class, 'index']);
 
+// Route for CRUD Users
 Route::get('/pengguna', [UserController::class, 'index']);
+Route::get('/daftarpengguna/formtambah', [UserController::class, 'create']);
+Route::post('/daftarpengguna/create', [UserController::class, 'store']);
+Route::get('/daftarpengguna/detail/{id}', [UserController::class, 'show']);
+Route::get('/daftarpengguna/formedit/{id}', [UserController::class, 'edit']);
+Route::post('/daftarpengguna/update', [UserController::class, 'update']);
+Route::get('/daftarpengguna/hapus/{id}', [UserController::class, 'destroy']);
 
-Route::get('/pengguna/formtambah', [UserController::class, 'create']);
-
-Route::post('/pengguna/create', [UserController::class, 'store']);
-
-Route::get('/pengguna/formedit/{id}', [UserController::class, 'edit']);
-
-Route::post('/pengguna/update', [UserController::class, 'update']);
-
-Route::get('/pengguna/hapus/{id}', [UserController::class, 'destroy']);
+// Route for CRUD Products
+Route::get('/welcome', [ProductController::class, 'index']);
+Route::get('/daftarproduk/formtambah', [ProductController::class, 'create']);
+Route::post('/daftarproduk/create', [ProductController::class, 'store']);
+Route::get('/daftarproduk/detail/{id}', [ProductController::class, 'show']);
+Route::get('/daftarproduk/formedit/{id}', [ProductController::class, 'edit']);
+Route::post('/daftarproduk/update', [ProductController::class, 'update']);
+Route::get('/daftarproduk/hapus/{id}', [ProductController::class, 'destroy']);
