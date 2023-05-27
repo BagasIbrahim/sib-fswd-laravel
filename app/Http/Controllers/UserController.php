@@ -27,7 +27,7 @@ class UserController extends Controller
 	{
 		// insert data ke table pengguna
 		DB::table('users')->insert([
-			'name' => $users->name,
+			'name_user' => $users->name,
 			'role' => $users->role,
 			'password' => $users->password,
 			'email' => $users->email,
@@ -35,12 +35,16 @@ class UserController extends Controller
 			'address' => $users->alamat
 		]);
 		// alihkan halaman ke halaman pengguna
-		return redirect('/pengguna');
+		return redirect('/daftarpengguna');
 	}
 	
 	public function show($id)
     {
-        //
+        // mengambil data pengguna berdasarkan id yang dipilih
+		$users = DB::table('users')->where('id', $id)->get();
+
+		// passing data pengguna yang didapat ke view detail.blade.php
+		return view('/TableUser/detail', ['users' => $users]);
     }
 
 	public function edit($id)
@@ -54,7 +58,7 @@ class UserController extends Controller
 	public function update(Request $users){
 		// update data pengguna
 		DB::table('users')->where('id', $users->id)->update([
-			'name' => $users->name,
+			'name_user' => $users->name,
 			'role' => $users->role,
 			'password' => $users->password,
 			'email' => $users->email,
@@ -62,7 +66,7 @@ class UserController extends Controller
 			'address' => $users->alamat
 		]);
 		// alihkan halaman ke halaman pengguna
-		return redirect('/pengguna');
+		return redirect('/daftarpengguna');
 	}
 
 	public function destroy($id)
@@ -71,6 +75,6 @@ class UserController extends Controller
 		DB::table('users')->where('id', $id)->delete();
 
 		// alihkan halaman ke halaman pengguna
-		return redirect('/pengguna');
+		return redirect('/daftarpengguna');
 	}
 }
