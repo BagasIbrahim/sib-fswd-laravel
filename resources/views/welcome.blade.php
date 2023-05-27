@@ -70,9 +70,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="">Contact</a>
                         </li>
-                        {{-- <li class="nav-item">
-                                <a href="/dashboard" class="mx-2 btn ">Login</a>
-                        </li> --}}
                     </ul>
                 </div>
                 <div class="navbar align-self-center d-flex">
@@ -204,37 +201,83 @@
                 <div class="col-lg-6 m-auto">
                     <h1 class="h1">Featured Product</h1>
                     <p>
-                        Below is product data that is still in table format.
-                    </p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                        Explicabo cupiditate cum autem quis dolorum totam maxime neque,
                 </div>
             </div>
-            <div class="table-responsive mx-2">
-                <table class="table table-striped" id="dataTable" width="100%">
-        
-                    <thead>
-                        <th>No</th>
-                        <th>Category</th>
-                        <th>Products</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Status</th>
-                    </thead>
-                    <tbody>
-                        @foreach($products as $p)
-                            <tr>
-                                <td>{{$p->id}}</td>
-                                <td>{{$p->category_id}}</td>
-                                <td>{{$p->name}}</td>
-                                <td>{{$p->description}}</td>
-                                <td>{{$p->price}}</td>
-                                <td>{{$p->status}}</td>
-                            </tr>
-            
-                        @endforeach
-            
-                    </tbody>
-            
-                </table>
+            <div class="row">
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="card h-100">
+                        <a href="shop-single.html">
+                            <img src="{{asset('vendor/img/product_img_01.jpg')}}" class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body">
+                            <ul class="list-unstyled d-flex justify-content-between">
+                                <li>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-muted fa fa-star"></i>
+                                    <i class="text-muted fa fa-star"></i>
+                                </li>
+                                <li class="text-muted text-right">Rp.240.000</li>
+                            </ul>
+                            <a href="" class="h2 text-decoration-none text-dark">Casio Watch</a>
+                            <p class="card-text">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt in culpa qui officia deserunt.
+                            </p>
+                            <p class="text-muted">Reviews (24)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="card h-100">
+                        <a href="shop-single.html">
+                            <img src="{{asset('vendor/img/product_img_02.jpg')}}" class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body">
+                            <ul class="list-unstyled d-flex justify-content-between">
+                                <li>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-muted fa fa-star"></i>
+                                    <i class="text-muted fa fa-star"></i>
+                                </li>
+                                <li class="text-muted text-right">Rp.700.000</li>
+                            </ul>
+                            <a href="" class="h2 text-decoration-none text-dark">Cloud Nike Shoes</a>
+                            <p class="card-text">
+                                Aenean gravida dignissim finibus. Nullam ipsum diam, posuere vitae pharetra sed, commodo ullamcorper.
+                            </p>
+                            <p class="text-muted">Reviews (48)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="card h-100">
+                        <a href="shop-single.html">
+                            <img src="{{asset('vendor/img/product_img_03.jpg')}}" class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body">
+                            <ul class="list-unstyled d-flex justify-content-between">
+                                <li>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                </li>
+                                <li class="text-muted text-right">Rp.650.000 </li>
+                            </ul>
+                            <a href="" class="h2 text-decoration-none text-dark">Summer Addides Shoes</a>
+                            <p class="card-text">
+                                Curabitur ac mi sit amet diam luctus porta. Phasellus pulvinar sagittis diam, et scelerisque ipsum lobortis nec.
+                            </p>
+                            <p class="text-muted">Reviews (74)</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
