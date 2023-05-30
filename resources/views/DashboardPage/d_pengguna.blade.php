@@ -69,7 +69,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Produk:</h6>
-                        <a class="collapse-item" href="">Kategori</a>
+                        <a class="collapse-item" href="/daftarkategori">Kategori</a>
                         <a class="collapse-item" href="/daftarproduk">Daftar Produk</a>
                     </div>
                 </div>
@@ -86,8 +86,8 @@
                     data-bs-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Pengguna:</h6>
-                        <a class="collapse-item" href="">Grup Pengguna</a>
-                        <a class="collapse-item" href="/daftarpengguna"">Daftar Pengguna</a>
+                        <a class="collapse-item" href="/daftargruppengguna">Grup Pengguna</a>
+                        <a class="collapse-item" href="/daftarpengguna">Daftar Pengguna</a>
                     </div>
                 </div>
             </li>
@@ -213,7 +213,7 @@
                                     <thead>
                                         <th>No</th>
                                         <th>Avatar</th>
-                                        <th>Nama</th>
+                                        <th>Name</th>
                                         <th>Email</th>
                                         <th>Phone</th>
                                         <th>Role</th>

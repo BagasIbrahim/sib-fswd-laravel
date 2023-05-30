@@ -69,7 +69,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Produk:</h6>
-                        <a class="collapse-item" href="">Kategori</a>
+                        <a class="collapse-item" href="/daftarkategori">Kategori</a>
                         <a class="collapse-item" href="/daftarproduk">Daftar Produk</a>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                     data-bs-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Pengguna:</h6>
-                        <a class="collapse-item" href="">Grup Pengguna</a>
+                        <a class="collapse-item" href="/daftargruppengguna">Grup Pengguna</a>
                         <a class="collapse-item" href="/daftarpengguna">Daftar Pengguna</a>
                     </div>
                 </div>
@@ -213,7 +213,7 @@
                                     <thead>
                                         <th>No</th>
                                         <th>Category</th>
-                                        <th>Products</th>
+                                        <th>Product Name</th>
                                         <th>Description</th>
                                         <th>Price</th>
                                         <th>Status</th>
@@ -223,7 +223,7 @@
                                         @foreach($products as $p)
                                             <tr>
                                                 <td>{{$p->id}}</td>
-                                                <td>{{$p->name_category}}</td>
+                                                <td>{{$p->category_id}}</td>
                                                 <td>{{$p->name_product}}</td>
                                                 <td>{{$p->description}}</td>
                                                 <td>{{$p->price}}</td>
