@@ -28,6 +28,6 @@ class Products extends Model
 
     public function users()
     {
-        return $this->belongsTo(Users::class, ['created_by', 'verified_by'], 'id');
+        return $this->belongsTo(User::class, ['created_by', 'verified_by'], 'id');
     }
 }

@@ -12,15 +12,20 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $table = 'users';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'name_user',
         'email',
         'password',
+        'role',
+        'phone',
+        'group_id',
     ];
 
     /**
@@ -41,4 +46,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function users_group()
+    {
+        return $this->belongsTo(UserGroup::class, 'group_id' , 'id');
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Products::class, ['created_by', 'verified_by'], 'id');
+    }
+
 }
