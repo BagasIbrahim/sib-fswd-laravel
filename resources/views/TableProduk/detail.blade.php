@@ -24,8 +24,8 @@
                     <input type="hidden" name="id" value="{{$p->id}}">
 
                     <div class="col-12">
-                        <label for="category" class="form-label">Kategori</label>
-                        <input type="text" class="form-control" value="{{$p->category_id}}" id="category" name="category" placeholder="Nama Lengkap">
+                        <label for="category_id" class="form-label">Category</label>
+                        <input type="text" class="form-control" value="{{$p->category_id}}" id="category_id" name="category_id" placeholder="Nama Lengkap">
                     </div>
                     <div class="col-md-6">
                         <label for="name_product" class="form-label">Product Name</label>

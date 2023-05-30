@@ -20,6 +20,7 @@
 
         @foreach($users as $u)
                 <form class="row g-3" action="/daftarpengguna/update" method="post">
+                    @method('put')
                     @csrf
                     <input type="hidden" name="id" value="{{$u->id}}">
 
@@ -27,15 +28,19 @@
                         <label for="name" class="form-label">Nama</label>
                         <input type="text" class="form-control" value="{{$u->name_user}}" id="name" name="name" placeholder="Nama Lengkap">
                     </div>
+                    <div class="col-12">
+                        <label for="group" class="form-label">Group</label>
+                        <input type="text" class="form-control" value="{{$u->group_id}}" id="group_id" name="group_id" placeholder="">
+                    </div>
                     <div class="col-md-6">
                         <label for="role" class="form-label">Role</label>
                         <select name="role" class="form-control">
-                            <option value="admin" <?php if ($u->role == 'admin') {
-                                                        echo 'selected';
-                                                    } ?>>Admin</option>
-                            <option value="staff" <?php if ($u->role == 'staff') {
-                                                        echo 'selected';
-                                                    } ?>>Staff</option>
+                            <option value="admin" {{ $u->role == 'admin' ? 'selected' : '' }}
+                                                    >Admin</option>
+                            <option value="staff" {{ $u->role == 'staff' ? 'selected' : '' }}
+                                                    >Staff</option>
+                            <option value="user" {{ $u->role == 'user' ? 'selected' : '' }}
+                                                    >Users</option>
                         </select>
                     </div>
                     <div class="col-md-6">
@@ -50,10 +55,6 @@
                     <div class="col-md-6">
                         <label for="phone" class="form-label">Telp</label>
                         <input type="text" class="form-control" id="telp" name="telp" value="{{$u->phone}}" placeholder="08xxxx">
-                    </div>
-                    <div class="col-12">
-                        <label for="address" class="form-label">Alamat</label>
-                        <input type="text" class="form-control" id="alamat" name="alamat" value="{{$u->address}}">
                     </div>
                     <div class="col-12">
                         <button type="submit" id="update" name="update" class="btn btn-primary">Simpan</button>

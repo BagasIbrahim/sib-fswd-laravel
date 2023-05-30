@@ -25,11 +25,16 @@
             <label for="name" class="form-label">Nama</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="Nama Lengkap">
         </div>
+        <div class="col-12">
+            <label for="group" class="form-label">Group</label>
+            <input type="text" class="form-control" id="group_id" name="group_id" placeholder="">
+        </div>
         <div class="col-md-6">
             <label for="role" class="form-label">Role</label>
             <select name="role" class="form-control">
             <option value="admin">Admin</option>
             <option value="staff">Staff</option>
+            <option value="user">User</option>
             </select>
         </div>
         <div class="col-md-6">
@@ -44,10 +49,6 @@
         <div class="col-md-6">
             <label for="phone" class="form-label">Telp</label>
             <input type="text" class="form-control" id="telp" name="telp" placeholder="08xxxx">
-        </div>
-        <div class="col-12">
-            <label for="address" class="form-label">Alamat</label>
-            <textarea type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat Lengkap"></textarea>
         </div>
         <!-- <div class="col-12">
             <label for="avatar" class="form-label">Avatar</label>

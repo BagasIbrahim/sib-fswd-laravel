@@ -20,12 +20,13 @@
 
         @foreach($products as $p)
                 <form class="row g-3" action="/daftarproduk/update" method="post">
+                    @method('put')
                     @csrf
                     <input type="hidden" name="id" value="{{$p->id}}">
 
                     <div class="col-12">
-                        <label for="category" class="form-label">Kategori</label>
-                        <input type="text" class="form-control" value="{{$p->category_id}}" id="category" name="category" placeholder="">
+                        <label for="category_id" class="form-label">Category</label>
+                        <input type="text" class="form-control" value="{{$p->category_id}}" id="category_id" name="category_id" placeholder="">
                     </div>
                     <div class="col-md-6">
                         <label for="name_product" class="form-label">Product Name</label>
