@@ -13,16 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('users_group', function (Blueprint $table) {
             $table->id();
-            $table->string('name_product', 100);
-            $table->string('description', 255);
-            $table->string('image', 100)->nullable();
-            $table->decimal('price', 10, 2);
-            $table->enum('status', ['accepted', 'rejected', 'waiting']);
+            $table->string('name_group', 100);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrentOnUpdate();
-            $table->dateTime('verified_at')->nullable();
         });
     }
 
@@ -33,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('users_group');
     }
 };

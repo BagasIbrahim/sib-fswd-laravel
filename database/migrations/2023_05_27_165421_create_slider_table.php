@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('description', 255);
             $table->string('image', 255);
             $table->string('link', 255)->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrentOnUpdate();
         });
     }
 
