@@ -33,7 +33,7 @@ class ComposerServiceProvider extends ServiceProvider
 
         $products = DB::table('products')
         ->join('categories', 'categories.id', '=', 'products.category_id')
-        ->select('products.id', 'category_id as name_category', 'products.name_product', 'products.description', 'products.price', 'products.status')
+        ->select('products.id', 'category_id', 'products.name_product', 'products.description', 'products.price', 'products.status')
         ->get();
         view()->composer(['/welcome', '/DashboardPage/d_produk'], function ($view) use ($products) {
             $view->with('products', $products);
