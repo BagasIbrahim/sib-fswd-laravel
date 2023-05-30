@@ -1,9 +1,13 @@
 <?php
 
-use App\Http\Controllers\ItemController;
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\GroupUserController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\ItemController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,20 +63,44 @@ Route::get('/conflict/{nama}', function ($namaItem) {
 
 Route::get('/', [ProductController::class, 'index']);
 
+//Route login
+Route::get('login', [LoginController::class, 'index']);
+
+//Route register
+Route::get('register', [RegisterController::class, 'index']);
+
 // Route for CRUD Users
 Route::get('/pengguna', [UserController::class, 'index']);
 Route::get('/daftarpengguna/formtambah', [UserController::class, 'create']);
 Route::post('/daftarpengguna/create', [UserController::class, 'store']);
 Route::get('/daftarpengguna/detail/{id}', [UserController::class, 'show']);
 Route::get('/daftarpengguna/formedit/{id}', [UserController::class, 'edit']);
-Route::post('/daftarpengguna/update', [UserController::class, 'update']);
+Route::put('/daftarpengguna/update', [UserController::class, 'update']);
 Route::get('/daftarpengguna/hapus/{id}', [UserController::class, 'destroy']);
 
 // Route for CRUD Products
-Route::get('/welcome', [ProductController::class, 'index']);
+// Route::get('/welcome', [ProductController::class, 'index']);
 Route::get('/daftarproduk/formtambah', [ProductController::class, 'create']);
 Route::post('/daftarproduk/create', [ProductController::class, 'store']);
 Route::get('/daftarproduk/detail/{id}', [ProductController::class, 'show']);
 Route::get('/daftarproduk/formedit/{id}', [ProductController::class, 'edit']);
-Route::post('/daftarproduk/update', [ProductController::class, 'update']);
+Route::put('/daftarproduk/update', [ProductController::class, 'update']);
 Route::get('/daftarproduk/hapus/{id}', [ProductController::class, 'destroy']);
+
+// Route for CRUD Categories
+Route::get('/daftarkategori', [CategoriesController::class, 'index']);
+Route::get('/daftarkategori/formtambah', [CategoriesController::class, 'create']);
+Route::post('/daftarkategori/create', [CategoriesController::class, 'store']);
+Route::get('/daftarkategori/detail/{id}', [CategoriesController::class, 'show']);
+Route::get('/daftarkategori/formedit/{id}', [CategoriesController::class, 'edit']);
+Route::put('/daftarkategori/update', [CategoriesController::class, 'update']);
+Route::get('/daftarkategori/hapus/{id}', [CategoriesController::class, 'destroy']);
+
+// Route for CRUD Group Users
+Route::get('/daftargruppengguna', [GroupUserController::class, 'index']);
+Route::get('/daftargruppengguna/formtambah', [GroupUserController::class, 'create']);
+Route::post('/daftargruppengguna/create', [GroupUserController::class, 'store']);
+Route::get('/daftargruppengguna/detail/{id}', [GroupUserController::class, 'show']);
+Route::get('/daftargruppengguna/formedit/{id}', [GroupUserController::class, 'edit']);
+Route::put('/daftargruppengguna/update', [GroupUserController::class, 'update']);
+Route::get('/daftargruppengguna/hapus/{id}', [GroupUserController::class, 'destroy']);
