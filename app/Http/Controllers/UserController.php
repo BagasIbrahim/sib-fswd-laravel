@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
 
 
 class UserController extends Controller
@@ -28,11 +30,11 @@ class UserController extends Controller
 		// insert data ke table pengguna
 		DB::table('users')->insert([
 			'name_user' => $users->name,
+			'group_id' => $users->group_id,
 			'role' => $users->role,
-			'password' => $users->password,
+			'password' => Hash::make($users->password),
 			'email' => $users->email,
 			'phone' => $users->telp,
-			'address' => $users->alamat
 		]);
 		// alihkan halaman ke halaman pengguna
 		return redirect('/daftarpengguna');
@@ -59,11 +61,11 @@ class UserController extends Controller
 		// update data pengguna
 		DB::table('users')->where('id', $users->id)->update([
 			'name_user' => $users->name,
+			'group_id' => $users->group_id,
 			'role' => $users->role,
-			'password' => $users->password,
+			'password' => Hash::make($users->password),
 			'email' => $users->email,
 			'phone' => $users->telp,
-			'address' => $users->alamat
 		]);
 		// alihkan halaman ke halaman pengguna
 		return redirect('/daftarpengguna');
