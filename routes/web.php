@@ -8,8 +8,9 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,21 +22,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/dashboard', function () {
-    return view('/DashboardPage/dashboard');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/daftarpengguna', function () {
     return view('/DashboardPage/d_pengguna');
-});
+})->middleware('auth');
 
-Route::get('/daftarproduk', function () {
-    return view('/DashboardPage/d_produk');
-});
 
 Route::get('/hello', function () {
     return "Nama saya adalah Bagas";
@@ -59,48 +53,53 @@ Route::get('/conflict/{nama}', function ($namaItem) {
     return "Item yang dicari adalah " . $namaItem;
 });
 
-// Route::get('/produk', [ItemController::class, 'items']);
 
-Route::get('/', [ProductController::class, 'index']);
+//Route landing page
+Route::get('/', [LandingPageController::class, 'index']);
 
-//Route login
-Route::get('login', [LoginController::class, 'index']);
-
-//Route register
-Route::get('register', [RegisterController::class, 'index']);
+//Route Dashboard
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
 // Route for CRUD Users
 Route::get('/pengguna', [UserController::class, 'index']);
-Route::get('/daftarpengguna/formtambah', [UserController::class, 'create']);
-Route::post('/daftarpengguna/create', [UserController::class, 'store']);
-Route::get('/daftarpengguna/detail/{id}', [UserController::class, 'show']);
-Route::get('/daftarpengguna/formedit/{id}', [UserController::class, 'edit']);
-Route::put('/daftarpengguna/update', [UserController::class, 'update']);
-Route::get('/daftarpengguna/hapus/{id}', [UserController::class, 'destroy']);
+Route::get('/daftarpengguna/formtambah', [UserController::class, 'create'])->middleware('auth');
+Route::post('/daftarpengguna/create', [UserController::class, 'store'])->middleware('auth');
+Route::get('/daftarpengguna/detail/{id}', [UserController::class, 'show'])->middleware('auth');
+Route::get('/daftarpengguna/formedit/{id}', [UserController::class, 'edit'])->middleware('auth');
+Route::put('/daftarpengguna/update', [UserController::class, 'update'])->middleware('auth');
+Route::get('/daftarpengguna/hapus/{id}', [UserController::class, 'destroy'])->middleware('auth');
 
 // Route for CRUD Products
-// Route::get('/welcome', [ProductController::class, 'index']);
-Route::get('/daftarproduk/formtambah', [ProductController::class, 'create']);
-Route::post('/daftarproduk/create', [ProductController::class, 'store']);
-Route::get('/daftarproduk/detail/{id}', [ProductController::class, 'show']);
-Route::get('/daftarproduk/formedit/{id}', [ProductController::class, 'edit']);
-Route::put('/daftarproduk/update', [ProductController::class, 'update']);
-Route::get('/daftarproduk/hapus/{id}', [ProductController::class, 'destroy']);
+Route::get('/daftarproduk', [ProductController::class, 'index'])->middleware('auth');
+Route::get('/daftarproduk/formtambah', [ProductController::class, 'create'])->middleware('auth');
+Route::post('/daftarproduk/create', [ProductController::class, 'store'])->middleware('auth');
+Route::get('/daftarproduk/detail/{id}', [ProductController::class, 'show'])->middleware('auth');
+Route::get('/daftarproduk/formedit/{id}', [ProductController::class, 'edit'])->middleware('auth');
+Route::put('/daftarproduk/update', [ProductController::class, 'update'])->middleware('auth');
+Route::get('/daftarproduk/hapus/{id}', [ProductController::class, 'destroy'])->middleware('auth');
 
 // Route for CRUD Categories
-Route::get('/daftarkategori', [CategoriesController::class, 'index']);
-Route::get('/daftarkategori/formtambah', [CategoriesController::class, 'create']);
-Route::post('/daftarkategori/create', [CategoriesController::class, 'store']);
-Route::get('/daftarkategori/detail/{id}', [CategoriesController::class, 'show']);
-Route::get('/daftarkategori/formedit/{id}', [CategoriesController::class, 'edit']);
-Route::put('/daftarkategori/update', [CategoriesController::class, 'update']);
-Route::get('/daftarkategori/hapus/{id}', [CategoriesController::class, 'destroy']);
+Route::get('/daftarkategori', [CategoriesController::class, 'index'])->middleware('auth');
+Route::get('/daftarkategori/formtambah', [CategoriesController::class, 'create'])->middleware('auth');
+Route::post('/daftarkategori/create', [CategoriesController::class, 'store'])->middleware('auth');
+Route::get('/daftarkategori/detail/{id}', [CategoriesController::class, 'show'])->middleware('auth');
+Route::get('/daftarkategori/formedit/{id}', [CategoriesController::class, 'edit'])->middleware('auth');
+Route::put('/daftarkategori/update', [CategoriesController::class, 'update'])->middleware('auth');
+Route::get('/daftarkategori/hapus/{id}', [CategoriesController::class, 'destroy'])->middleware('auth');
 
 // Route for CRUD Group Users
-Route::get('/daftargruppengguna', [GroupUserController::class, 'index']);
-Route::get('/daftargruppengguna/formtambah', [GroupUserController::class, 'create']);
-Route::post('/daftargruppengguna/create', [GroupUserController::class, 'store']);
-Route::get('/daftargruppengguna/detail/{id}', [GroupUserController::class, 'show']);
-Route::get('/daftargruppengguna/formedit/{id}', [GroupUserController::class, 'edit']);
-Route::put('/daftargruppengguna/update', [GroupUserController::class, 'update']);
-Route::get('/daftargruppengguna/hapus/{id}', [GroupUserController::class, 'destroy']);
+Route::get('/daftargruppengguna', [GroupUserController::class, 'index'])->middleware('auth');
+Route::get('/daftargruppengguna/formtambah', [GroupUserController::class, 'create'])->middleware('auth');
+Route::post('/daftargruppengguna/create', [GroupUserController::class, 'store'])->middleware('auth');
+Route::get('/daftargruppengguna/detail/{id}', [GroupUserController::class, 'show'])->middleware('auth');
+Route::get('/daftargruppengguna/formedit/{id}', [GroupUserController::class, 'edit'])->middleware('auth');
+Route::put('/daftargruppengguna/update', [GroupUserController::class, 'update'])->middleware('auth');
+Route::get('/daftargruppengguna/hapus/{id}', [GroupUserController::class, 'destroy'])->middleware('auth');
+
+//Route login   
+Route::get('login', [LoginController::class, 'index']);
+Route::post('login', [LoginController::class, 'authenticate']);
+Route::post('logout', [LoginController::class, 'logout']);
+
+//Route register
+Route::get('/register', [RegisterController::class, 'index']);
