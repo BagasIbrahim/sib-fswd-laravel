@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\DB;
+use App\Models\Products;
+use App\Models\User;
 
 
 class ComposerServiceProvider extends ServiceProvider
@@ -31,12 +33,12 @@ class ComposerServiceProvider extends ServiceProvider
             $view->with('users', $users);
         });
 
-        $products = DB::table('products')
-        ->join('categories', 'categories.id', '=', 'products.category_id')
-        // ->select('products.id', 'category_id as name_category', 'products.name_product', 'products.description', 'products.price', 'products.status')
-        ->get();
-        view()->composer(['/welcome', '/DashboardPage/d_produk'], function ($view) use ($products) {
-            $view->with('products', $products);
-        });
+        // $products = Products::select('products.*', 'categories.name_category')
+        // ->with( 'categories', 'users')
+        // ->join('categories', 'categories.id', '=', 'products.category_id')
+        // ->get();
+        // view()->composer(['/welcome', '/DashboardPage/d_produk'], function ($view) use ($products) {
+        //     $view->with('products', $products);
+        // });
     }
 }
