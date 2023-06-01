@@ -10,7 +10,7 @@
         </div>
 
         <div>
-            <a href="/daftarproduk/formtambah" class="my-2 mx-3 btn btn-primary">Tambah Pengguna</a>
+            <a href="/daftarproduk/formtambah" class="my-2 mx-3 btn btn-primary">Tambah Produk</a>
         </div><br>
          
         <div class="card-body">

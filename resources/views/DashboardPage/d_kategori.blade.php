@@ -6,11 +6,11 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h4 class="m-0 font-weight-bold text-primary">Data Tabel Pengguna</h4>
+            <h4 class="m-0 font-weight-bold text-primary">Data Tabel Kategori</h4>
         </div>
 
         <div>
-            <a href="/daftarkategori/formtambah" class="my-2 mx-3 btn btn-primary">Tambah Pengguna</a>
+            <a href="/daftarkategori/formtambah" class="my-2 mx-3 btn btn-primary">Tambah Kategori</a>
         </div><br>
          
         <div class="card-body">
