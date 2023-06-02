@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Categories;
 
 class CategoriesController extends Controller
 {
@@ -39,6 +40,14 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name_category' => 'required|string',
+        ],
+        [
+            'name_category.required' => 'Nama Kategori harus diisi',
+            'name_category.string' => 'Nama Kategori harus berupa string'
+        ]
+    );
         // insert data ke table categories
         DB::table('categories')->insert([
             'name_category' => $request->name_category,
@@ -83,11 +92,19 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        $request->validate([
+            'name_category' => 'required|string'
+        ],
+        [
+            'name_category.required' => 'Nama Kategori harus diisi',
+            'name_category.string' => 'Nama Kategori harus berupa string'
+        ]
+    );
         // update data categories
-        DB::table('categories')->where('id', $id)->update([
-            'name_category' => $request->name_category,
+		DB::table('categories')->where('id', $request->id)->update([
+            'name_category' => $request->name_category
         ]);
         // alihkan halaman ke halaman categories
         return redirect('/daftarkategori');

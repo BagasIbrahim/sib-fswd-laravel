@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\UserGroup;
+
 
 
 class GroupUserController extends Controller
@@ -40,9 +42,16 @@ class GroupUserController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name_group' => 'required|string'
+        ],
+        [
+            'name_group.required' => 'Nama Grup harus diisi',
+            'name_group.string' => 'Nama Grup harus berupa string'
+        ]);
         // insert data ke table users_group
         DB::table('users_group')->insert([
-            'name_group' => $request->name_group,
+            'name_group' => $request->name_group
         ]);
         // alihkan halaman ke halaman grup pengguna
         return redirect('/daftargruppengguna');
@@ -83,10 +92,17 @@ class GroupUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        $request->validate([
+            'name_group' => 'required|string'
+        ],
+        [
+            'name_group.required' => 'Nama grup pengguna harus diisi',
+            'name_group.string' => 'Nama grup pengguna harus berupa string'
+        ]);
         // update data users_group
-        DB::table('users_group')->where('id', $id)->update([
+		DB::table('users_group')->where('id', $request->id)->update([
             'name_group' => $request->name_group,
         ]);
         // alihkan halaman ke halaman grup pengguna

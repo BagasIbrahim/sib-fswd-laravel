@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Products;
+use App\Enums\ServerStatus;
 
 class ProductController extends Controller
 {
@@ -17,10 +19,10 @@ class ProductController extends Controller
 
         $products = DB::table('products')
         ->join('categories', 'categories.id', '=', 'products.category_id')
-        // ->select('products.id', 'category_id AS categories.name_category', 'products.name_product', 'products.description', 'products.price', 'products.status')
+        ->select('products.*', 'categories.name_category')
         ->get();
         // dd($products);
-        return view('/welcome', ['products' => $products]);
+        return view('/DashboardPage/d_produk', ['products' => $products]);
     }
 
     /**
@@ -40,18 +42,48 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $products)
+    public function store(Request $request)
     {
-        // 
+        $request->validate([
+            'category_id' => 'required|integer',
+            'name_product' => 'required|string',
+            'description' => 'required',
+            'price' => 'required|decimal:2',
+            'status' => 'required|in:accepted,rejected,waiting',
+            'created_by' => 'required|integer',
+            'verified_by' => 'required|integer'
+        ],
+        [
+            'category_id.required' => 'Kategori harus diisi.',
+            'name_product.required' => 'Nama produk harus diisi.',
+            'description.required' => 'Deskripsi harus diisi.',
+            'price.required' => 'Harga harus diisi.',
+            'status.required' => 'Status harus diisi.',
+            'created_by.required' => 'created_by harus diisi.',
+            'verified_by.required' => 'verified_by harus diisi.',
+            'category_id.integer' => 'Kategori harus berupa angka.',
+            'name_product.string' => 'Nama produk harus berupa string.',
+            'price.decimal' => 'Harga harus berupa angka.',
+            'status.in' => 'Status harus berupa accepted, rejected, atau waiting.',
+            'created_by.integer' => 'created_by harus berupa angka.',
+            'verified_by.integer' => 'verified_by harus berupa angka.'
+        ]      
+    );
+
+        // if ($request->fails()) {
+        //     return redirect('daftarproduk/formtambah')
+        //                 ->withErrors($request);
+        // }
+
         // insert data ke table users
         DB::table('products')->insert([
-            'category_id' => $products->category_id,
-            'name_product' => $products->name_product,
-            'description' => $products->description,
-            'price' => $products->price,
-            'status' => $products->status,
-            'created_by' => $products->created_by,
-            'verified_by' => $products->verified_by
+            'category_id' => $request->category_id,
+            'name_product' => $request->name_product,
+            'description' => $request->description,
+            'price' => $request->price,
+            'status' => $request->status,
+            'created_by' => $request->created_by,
+            'verified_by' => $request->verified_by
         ]);
 
         // alihkan halaman ke halaman produk
@@ -93,17 +125,49 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $products)
+    public function update(Request $request)
     {
+        $request->validate([
+            'category_id' => 'required|integer',
+            'name_product' => 'required|string',
+            'description' => 'required',
+            'price' => 'required|decimal:2',
+            'status' => 'required|in:accepted,rejected,waiting',
+            'created_by' => 'required|integer',
+            'verified_by' => 'required|integer'
+        ],
+        [
+            'category_id.required' => 'Kategori harus diisi.',
+            'name_product.required' => 'Nama produk harus diisi.',
+            'description.required' => 'Deskripsi harus diisi.',
+            'price.required' => 'Harga harus diisi.',
+            'status.required' => 'Status harus diisi.',
+            'created_by.required' => 'created_by harus diisi.',
+            'verified_by.required' => 'verified_by harus diisi.',
+            'category_id.integer' => 'Kategori harus berupa angka.',
+            'name_product.string' => 'Nama produk harus berupa string.',
+            'price.decimal' => 'Harga harus berupa angka.',
+            'status.in' => 'Status harus berupa accepted, rejected, atau waiting.',
+            'created_by.integer' => 'created_by harus berupa angka.',
+            'verified_by.integer' => 'verified_by harus berupa angka.'
+        ]
+    );
+
+
+
+        // if ($request->fails()) {
+        //     return redirect('daftarproduk/formedit')
+        //                 ->withErrors($request);
+        // }
         // update data produk
-        DB::table('products')->where('id', $products->id)->update([
-            'category_id' => $products->category_id,
-            'name_product' => $products->name_product,
-            'description' => $products->description,
-            'price' => $products->price,
-            'status' => $products->status,
-            'created_by' => $products->created_by,
-            'verified_by' => $products->verified_by
+        DB::table('products')->where('id', $request->id)->update([
+            'category_id' => $request->category_id,
+            'name_product' => $request->name_product,
+            'description' => $request->description,
+            'price' => $request->price,
+            'status' => $request->status,
+            'created_by' => $request->created_by,
+            'verified_by' => $request->verified_by
         ]);
         // alihkan halaman ke halaman produk
         return redirect('daftarproduk');
