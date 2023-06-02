@@ -11,7 +11,6 @@
 
     <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/bootstrap2.min.css')}}">
     <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/templatemo.css')}}">
-    <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/dataTables.bootstrap5.min.css')}}"/>
 
 
     <!-- Load fonts style after rendering the layout styles -->
@@ -87,7 +86,7 @@
                     </a>
                 </div>
                 <div>
-                    <a href="/dashboard" class="mx-2 btn ">Login</a>
+                    <a href="login" class="mx-2 btn" >Login</a>
                 </div>
             </div>
 
@@ -361,13 +360,6 @@
     <script src="{{asset('vendor/bootstrap/javascript/jquery.min.js')}}"></script>
     <script src="{{asset('vendor/bootstrap/javascript/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('vendor/bootstrap/javascript/templatemo.js')}}"></script>
-    <script src="{{asset('vendor/bootstrap/javascript/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('vendor/bootstrap/javascript/dataTables.bootstrap5.min.js')}}"></script>
-    <script>
-        $(document).ready(function() {
-            $('#dataTable').DataTable();
-        });
-    </script>
     <!-- End Script -->
 </body>
 </html>
