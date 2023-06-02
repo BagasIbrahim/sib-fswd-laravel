@@ -27,10 +27,18 @@
                     <div class="col-12">
                         <label for="name" class="form-label">Nama</label>
                         <input type="text" class="form-control" value="{{$u->name_user}}" id="name" name="name" placeholder="Nama Lengkap">
+                        {{-- - error message untuk nama user--}}
+                        @error('name')
+                        <div class="my-2 alert alert-danger">{{ $message }}</div>
+                        @enderror 
                     </div>
                     <div class="col-12">
                         <label for="group" class="form-label">Group</label>
                         <input type="text" class="form-control" value="{{$u->group_id}}" id="group_id" name="group_id" placeholder="">
+                        {{-- - error message untuk group --}}
+                        @error('group_id')
+                        <div class="my-2 alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-md-6">
                         <label for="role" class="form-label">Role</label>
@@ -41,21 +49,41 @@
                                                     >Staff</option>
                             <option value="user" {{ $u->role == 'user' ? 'selected' : '' }}
                                                     >Users</option>
+                            {{--> error message untuk role --}}
+                            @error('role')
+                            <div class="my-2 alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </select>
                     </div>
                     <div class="col-md-6">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password" value="{{$u->password}}">
                         <input type="checkbox" class="form-checkbox"> Show password
+                        {{-- - error message untuk password --}}
+                        @error('password')
+                        <div class="my-2 alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-md-6">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" id="email" name="email" value="{{$u->email}}" placeholder="name@examples.com">
+                        {{-- - error message untuk email --}}
+                        @error('email')
+                        <div class="my-2 alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-md-6">
                         <label for="phone" class="form-label">Telp</label>
                         <input type="text" class="form-control" id="telp" name="telp" value="{{$u->phone}}" placeholder="08xxxx">
+                        {{-- - error message untuk phone --}}
+                        @error('telp')
+                        <div class="my-2 alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
+                    {{-- <div class="col-12">
+                        <label for="avatar" class="form-label">Avatar</label>
+                        <input type="file" class="form-control" id="avatar" name="avatar" value="{{$u->avatar}}"aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                    </div> --}}
                     <div class="col-12">
                         <button type="submit" id="update" name="update" class="btn btn-primary">Simpan</button>
                     </div>

@@ -24,6 +24,10 @@
         <div class="col-md-6">
             <label for="name_group" class="form-label">Group Name</label>
             <input type="text" class="form-control" id="name_group" name="name_group" placeholder="Group Name">
+             {{-- - error message untuk name_group--}}
+             @error('name_group')
+             <div class="my-2 alert alert-danger">{{ $message }}</div>
+             @enderror
         </div>
         <div class="col-12">
             <button type="submit" name="submit" class="btn btn-primary">Simpan</button>

@@ -18,27 +18,43 @@
             </div>
         </header>
 
-        @foreach($products as $p)
+            @foreach($products as $p)
                 <form class="row g-3" action="/daftarproduk/update" method="post">
                     @method('put')
                     @csrf
                     <input type="hidden" name="id" value="{{$p->id}}">
-
+                    
                     <div class="col-12">
                         <label for="category_id" class="form-label">Category</label>
                         <input type="text" class="form-control" value="{{$p->category_id}}" id="category_id" name="category_id" placeholder="">
+                        {{-- - error message untuk category --}}
+                         @error('category_id')
+                        <div class="my-2 alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-md-6">
                         <label for="name_product" class="form-label">Product Name</label>
                         <input type="text" class="form-control" id="name_product" name="name_product" value="{{$p->name_product}}" placeholder="Product Name">
+                        {{-- - error message untuk nama product --}}
+                        @error('name_product')
+                        <div class="my-2 alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-md-6">
                         <label for="description" class="form-label">Description</label>
                         <input type="text" class="form-control" id="description" name="description" value="{{$p->description}}" placeholder="Product Description">
+                        {{-- - error message untuk description --}}
+                        @error('description')
+                        <div class="my-2 alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-md-6">
                         <label for="price" class="form-label">Price</label>
                         <input type="text" class="form-control" id="price" name="price" value="{{$p->price}}" placeholder="xxx.xx">
+                        {{-- - error message untuk price --}}
+                        @error('price')
+                        <div class="my-2 alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-md-6">
                         <label for="status" class="form-label">Status</label>
@@ -50,14 +66,26 @@
                             <option value="waiting" {{ $p->status == 'waiting' ? 'selected' : '' }}
                             >Waiting</option>
                         </select>
+                        {{-- - error message untuk status --}}
+                        @error('status')
+                        <div class="my-2 alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-12">
                             <label for="created_by" class="form-label">Created</label>
                             <input type="text" class="form-control" value="{{$p->created_by}}" id="created_by" name="created_by" placeholder="">
+                            {{-- - error message untuk created --}}
+                            @error('created_by')
+                            <div class="my-2 alert alert-danger">{{ $message }}</div>
+                            @enderror
                     </div>
                     <div class="col-12">
                             <label for="verified_by" class="form-label">Verified</label>
                             <input type="text" class="form-control" value="{{$p->verified_by}}" id="verified_by" name="verified_by" placeholder="">
+                            {{-- - error message untuk verified --}}
+                            @error('verified_by')
+                            <div class="my-2 alert alert-danger">{{ $message }}</div>\
+                            @enderror
                     </div>
                     <div class="col-12">
                         <button type="submit" id="update" name="update" class="btn btn-primary">Simpan</button>

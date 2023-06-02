@@ -24,10 +24,18 @@
         <div class="col-12">
             <label for="name" class="form-label">Nama</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="Nama Lengkap">
+            {{-- - error message untuk nama ueer--}}
+            @error('name')
+            <div class="my-2 alert alert-danger">{{ $message }}</div>
+            @enderror
         </div>
         <div class="col-12">
             <label for="group" class="form-label">Group</label>
             <input type="text" class="form-control" id="group_id" name="group_id" placeholder="">
+            {{-- - error message untuk group --}}
+            @error('group_id')
+            <div class="my-2 alert alert-danger">{{ $message }}</div>
+            @enderror
         </div>
         <div class="col-md-6">
             <label for="role" class="form-label">Role</label>
@@ -36,24 +44,40 @@
             <option value="staff">Staff</option>
             <option value="user">User</option>
             </select>
+            {{-- - error message untuk role --}}
+            @error('role')
+            <div class="my-2 alert alert-danger">{{ $message }}</div>
+            @enderror
         </div>
         <div class="col-md-6">
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control" id="password" name="password">
             <input type="checkbox" class="form-checkbox"> Show password
+            {{-- - error message untuk password --}}
+            @error('password')
+            <div class="my-2 alert alert-danger">{{ $message }}</div>
+            @enderror
         </div>
         <div class="col-md-6">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" name="email" placeholder="name@examples.com">
+            {{-- - error message untuk email --}}
+            @error('email')
+            <div class="my-2 alert alert-danger">{{ $message }}</div>
+            @enderror
         </div>
         <div class="col-md-6">
             <label for="phone" class="form-label">Telp</label>
             <input type="text" class="form-control" id="telp" name="telp" placeholder="08xxxx">
+            {{-- - error message untuk phone--}}
+            @error('telp')
+            <div class="my-2 alert alert-danger">{{ $message }}</div>
+            @enderror
         </div>
-        <!-- <div class="col-12">
+        {{-- <div class="col-12">
             <label for="avatar" class="form-label">Avatar</label>
-            <input type="file" class="form-control" id="inputGroupFile04" name="avatar" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-        </div> -->
+            <input type="file" class="form-control" id="avatar" name="avatar" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+        </div> --}}
         <div class="col-12">
             <button type="submit" name="submit" class="btn btn-primary">Simpan</button>
         </div>

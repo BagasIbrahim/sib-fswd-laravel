@@ -24,6 +24,10 @@
         <div class="col-md-6">
             <label for="name_category" class="form-label">Category Name</label>
             <input type="text" class="form-control" id="name_category" name="name_category" placeholder="Category Name">
+            {{-- - error message untuk name_category --}}
+            @error('name_category')
+            <div class="my-2 alert alert-danger">{{ $message }}</div>
+            @enderror
         </div>
         <div class="col-12">
             <button type="submit" name="submit" class="btn btn-primary">Simpan</button>
