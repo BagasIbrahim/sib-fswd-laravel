@@ -27,11 +27,11 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // mengambil data dari table users
-		$users = DB::table('users')->get();
-        view()->composer(['/TableUser/users', '/DashboardPage/d_pengguna'], function ($view) use ($users) {
-            $view->with('users', $users);
-        });
+        // // mengambil data dari table users
+		// $users = DB::table('users')->get();
+        // view()->composer(['/TableUser/users', '/DashboardPage/d_pengguna'], function ($view) use ($users) {
+        //     $view->with('users', $users);
+        // });
 
         // $products = Products::select('products.*', 'categories.name_category')
         // ->with( 'categories', 'users')
