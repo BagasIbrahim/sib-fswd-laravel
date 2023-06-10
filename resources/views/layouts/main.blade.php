@@ -12,7 +12,7 @@
     <title>Database Admin - Dashboard</title>
 
     <!-- Custom fonts for this template-->
-    <link href="{{asset('vendor/bootstrap/css/fontawesome.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('vendor/bootstrap/css/all.css')}}" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -51,6 +51,15 @@
                     <span>Dashboard</span></a>
             </li>
 
+            <!-- Nav Item - Dashboard -->
+            @if (Auth::user()->role == 'admin'||Auth::user()->role == 'staff')
+            <li class="nav-item">
+                <a class="nav-link" href="/daftarslider">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Slider</span></a>
+            </li>
+            @endif
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -60,6 +69,7 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
+            @if (Auth::user()->role == 'admin'||Auth::user()->role == 'staff'||Auth::user()->role == 'user')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
@@ -69,13 +79,19 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Produk:</h6>
+                        @if (Auth::user()->role == 'admin'||Auth::user()->role == 'staff')        
                         <a class="collapse-item" href="/daftarkategori">Kategori</a>
-                        <a class="collapse-item" href="/daftarproduk">Daftar Produk</a>
+                        @endif
+                        @if (Auth::user()->role == 'admin'||Auth::user()->role == 'staff'||Auth::user()->role == 'user')
+                        <a class="collapse-item" href="/daftarproduk">Daftar Produk</a>                            
+                        @endif
                     </div>
                 </div>
             </li>
+            @endif
 
             <!-- Nav Item - Utilities Collapse Menu -->
+            @if (Auth::user()->role == 'admin'||Auth::user()->role == 'staff')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
@@ -91,6 +107,7 @@
                     </div>
                 </div>
             </li>
+            @endif
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -117,7 +134,7 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Search -->
+                    {{-- <!-- Topbar Search -->
                     <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
@@ -129,7 +146,7 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
+                    </form> --}}
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -194,7 +211,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2023</span>
+                        <span>Copyright &copy; Bagas Maulana Ibrahim</span>
                     </div>
                 </div>
             </footer>
