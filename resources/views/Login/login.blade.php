@@ -53,8 +53,7 @@
                                             <label for="exampleInputPassword" class="form-label">Password</label>
                                             <input type="password" name="password" class="form-control form-control-user"
                                                 id="password" placeholder="Password">
-                                            <input type="checkbox" class="form-checkbox"> Show password
-
+                                            <input type="checkbox" class="form-checkbox mt-2"> Show password
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
                                     </form>
