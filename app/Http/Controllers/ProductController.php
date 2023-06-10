@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Products;
-use App\Enums\ServerStatus;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -16,7 +15,6 @@ class ProductController extends Controller
      */
     public function index()
     {
-
         $products = DB::table('products')
         ->join('categories', 'categories.id', '=', 'products.category_id')
         ->select('products.*', 'categories.name_category')
@@ -32,7 +30,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view ('/TableProduk/formtambah');
+        $categories = DB::table('categories')->get();
+        $users = DB::table('users')->get();
+        // $users = DB::table('users')->get();
+         return view ('/TableProduk/p_tambah', ['categories' => $categories, 'users' => $users]);
 
     }
 
@@ -51,29 +52,34 @@ class ProductController extends Controller
             'price' => 'required|decimal:2',
             'status' => 'required|in:accepted,rejected,waiting',
             'created_by' => 'required|integer',
-            'verified_by' => 'required|integer'
+            'verified_by' => 'required|integer',
+            'image' => 'required|mimes:jpeg,png,jpg,svg'
         ],
         [
-            'category_id.required' => 'Kategori harus diisi.',
-            'name_product.required' => 'Nama produk harus diisi.',
-            'description.required' => 'Deskripsi harus diisi.',
-            'price.required' => 'Harga harus diisi.',
-            'status.required' => 'Status harus diisi.',
-            'created_by.required' => 'created_by harus diisi.',
-            'verified_by.required' => 'verified_by harus diisi.',
+            'category_id.required' => 'Kategori tidak boleh kosong',
+            'name_product.required' => 'Nama produk tidak boleh kosong',
+            'description.required' => 'Deskripsi tidak boleh kosong',
+            'price.required' => 'Harga tidak boleh kosong',
+            'status.required' => 'Status tidak boleh kosong',
+            'created_by.required' => 'created_by tidak boleh kosong',
+            'verified_by.required' => 'verified_by tidak boleh kosong',
+            'image.required' => 'Gambar harus di upload.',
             'category_id.integer' => 'Kategori harus berupa angka.',
             'name_product.string' => 'Nama produk harus berupa string.',
             'price.decimal' => 'Harga harus berupa angka.',
             'status.in' => 'Status harus berupa accepted, rejected, atau waiting.',
             'created_by.integer' => 'created_by harus berupa angka.',
-            'verified_by.integer' => 'verified_by harus berupa angka.'
+            'verified_by.integer' => 'verified_by harus berupa angka.',
+            'image.mimes' => 'Gambar harus berupa jpeg, png, jpg, atau svg.',
         ]      
     );
 
-        // if ($request->fails()) {
-        //     return redirect('daftarproduk/formtambah')
-        //                 ->withErrors($request);
-        // }
+        // Cek apakah upload file
+        if ($request->hasFile('image')) {
+            $name = $request->file('image');
+            $imageName = 'Product_' . time() . '.' . $name->getClientOriginalExtension();
+            $path = Storage::putFileAs('public/images/products', $request->file('image'), $imageName);
+        }	
 
         // insert data ke table users
         DB::table('products')->insert([
@@ -83,7 +89,8 @@ class ProductController extends Controller
             'price' => $request->price,
             'status' => $request->status,
             'created_by' => $request->created_by,
-            'verified_by' => $request->verified_by
+            'verified_by' => $request->verified_by,
+            'image' => $imageName
         ]);
 
         // alihkan halaman ke halaman produk
@@ -100,8 +107,10 @@ class ProductController extends Controller
     {
         // mengambil data produk berdasarkan id yang dipilih
         $products = DB::table('products')->where('id', $id)->get();
+        $categories = DB::table('categories')->get();
+        $users = DB::table('users')->get(); 
         // passing data produk yang didapat ke view detail.blade.php
-        return view('/TableProduk/detail', ['products' => $products]);
+        return view('/TableProduk/p_detail', ['products' => $products, 'categories' => $categories, 'users' => $users]);
     }
 
     /**
@@ -114,8 +123,10 @@ class ProductController extends Controller
     {
         // mengambil data produk berdasarkan id yang dipilih
         $products = DB::table('products')->where('id', $id)->get();
+        $categories = DB::table('categories')->get();
+        $users = DB::table('users')->get(); 
         // passing data produk yang didapat ke view edit.blade.php
-        return view('/TableProduk/formedit', ['products' => $products]);
+        return view('/TableProduk/p_edit', ['products' => $products, 'categories' => $categories, 'users' => $users]);
     }
 
     /**
@@ -134,32 +145,39 @@ class ProductController extends Controller
             'price' => 'required|decimal:2',
             'status' => 'required|in:accepted,rejected,waiting',
             'created_by' => 'required|integer',
-            'verified_by' => 'required|integer'
+            'verified_by' => 'required|integer',
+            'image' => 'required|mimes:jpeg,png,jpg,svg'
         ],
         [
-            'category_id.required' => 'Kategori harus diisi.',
-            'name_product.required' => 'Nama produk harus diisi.',
-            'description.required' => 'Deskripsi harus diisi.',
-            'price.required' => 'Harga harus diisi.',
-            'status.required' => 'Status harus diisi.',
-            'created_by.required' => 'created_by harus diisi.',
-            'verified_by.required' => 'verified_by harus diisi.',
+            'category_id.required' => 'Kategori tidak boleh kosong',
+            'name_product.required' => 'Nama produk tidak boleh kosong',
+            'description.required' => 'Deskripsi tidak boleh kosong',
+            'price.required' => 'Harga tidak boleh kosong',
+            'status.required' => 'Status tidak boleh kosong',
+            'created_by.required' => 'created_by tidak boleh kosong',
+            'verified_by.required' => 'verified_by tidak boleh kosong',
             'category_id.integer' => 'Kategori harus berupa angka.',
+            'image.required' => 'Gambar harus di upload.',
             'name_product.string' => 'Nama produk harus berupa string.',
             'price.decimal' => 'Harga harus berupa angka.',
             'status.in' => 'Status harus berupa accepted, rejected, atau waiting.',
             'created_by.integer' => 'created_by harus berupa angka.',
-            'verified_by.integer' => 'verified_by harus berupa angka.'
+            'verified_by.integer' => 'verified_by harus berupa angka.',
+            'image.mimes' => 'Gambar harus berupa jpeg, png, jpg, atau svg.',
         ]
     );
+    if ($request->hasFile('image')) {
 
+        // ambil nama file gambar lama dari database
+        $oldImage = DB::table('products')->where('id', $request->id)->value('image');
+        // Menghapus file lama dari storage
+        Storage::delete('public/images/products/'. $oldImage);
+        // Menyimpan gambar baru ke storage
+        $name = $request->file('image');
+        $imageName = 'Product_' . time() . '.' . $name->getClientOriginalExtension();
+        Storage::putFileAs('public/images/products', $request->file('image'), $imageName);
 
-
-        // if ($request->fails()) {
-        //     return redirect('daftarproduk/formedit')
-        //                 ->withErrors($request);
-        // }
-        // update data produk
+    }	
         DB::table('products')->where('id', $request->id)->update([
             'category_id' => $request->category_id,
             'name_product' => $request->name_product,
@@ -167,7 +185,8 @@ class ProductController extends Controller
             'price' => $request->price,
             'status' => $request->status,
             'created_by' => $request->created_by,
-            'verified_by' => $request->verified_by
+            'verified_by' => $request->verified_by,
+            'image' => $imageName
         ]);
         // alihkan halaman ke halaman produk
         return redirect('daftarproduk');
@@ -180,7 +199,12 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   
+        // ambil nama file gambar lama dari database
+        $oldImage = DB::table('products')->where('id', $id)->value('image');
+        // Menghapus file lama dari storage
+        Storage::delete('public/images/products/'. $oldImage);
+        
         // menghapus data produk berdasarkan id yang dipilih
         DB::table('products')->where('id', $id)->delete();
         // alihkan halaman ke halaman produk

@@ -31,7 +31,7 @@ class GroupUserController extends Controller
     public function create()
     {
         // memanggil view tambah
-        return view('/TableGroupUser/formtambah');
+        return view('/TableGroupUser/g_tambah');
     }
 
     /**
@@ -68,7 +68,7 @@ class GroupUserController extends Controller
         // mengambil data users_group berdasarkan id yang dipilih
         $group = DB::table('users_group')->where('id', $id)->get();
         // passing data users_group yang didapat ke view detail.blade.php
-        return view('/TableGroupUser/detail', ['group' => $group]);
+        return view('/TableGroupUser/g_detail', ['group' => $group]);
     }
 
     /**
@@ -82,7 +82,7 @@ class GroupUserController extends Controller
         // mengambil data users_group berdasarkan id yang dipilih
         $group = DB::table('users_group')->where('id', $id)->get();
         // passing data users_group yang didapat ke view edit.blade.php
-        return view('/TableGroupUser/formedit', ['group' => $group]);
+        return view('/TableGroupUser/g_edit', ['group' => $group]);
     }
 
     /**

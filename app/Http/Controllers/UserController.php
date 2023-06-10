@@ -6,23 +6,25 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;	
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-use App\Models\User;
 
 class UserController extends Controller
 {
 	public function index()
 	{
 		// mengambil data dari table users
-		$users = DB::table('users')->get();
-
+		$users = DB::table('users')
+		->join('users_group', 'users_group.id', '=', 'users.group_id')
+		->select('users.*', 'users_group.name_group')
+		->get();
 		// mengirim data pegawai ke view users
-		return view('/TableUser/users', ['users' => $users]);
+		return view('/DashboardPage/d_pengguna', ['users' => $users]);
 	}
 
 	// method untuk menampilkan view form tambah users
 	public function create()
 	{
-		return view('/TableUser/formtambah');
+		$group = DB::table('users_group')->get();
+		return view('/TableUser/u_tambah', ['users_group' => $group]);
 	}
 
 	public function store(Request $request)
@@ -34,7 +36,7 @@ class UserController extends Controller
 			'password' => 'required|min:5',
 			'email' => 'required|email',
 			'telp' => 'required|numeric',
-			// 'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+			'avatar' => 'required|mimes:jpeg,png,jpg,svg',
 		],
 		[
 			'name.required' => 'Nama tidak boleh kosong',
@@ -50,14 +52,18 @@ class UserController extends Controller
 			'email.email' => 'Email tidak valid',
 			'telp.required' => 'Nomor telepon tidak boleh kosong',
 			'telp.numeric' => 'Nomor telepon harus berupa angka',
+			'avatar.required' => 'Avatar tidak boleh kosong',
+			'avatar.mimes' => 'Avatar harus berupa jpeg, png, jpg, atau svg',
 		]
 	);
-		// 
-		if ($request->hasFile('avatar')) {
+		// Cek apakah upload file
+        if ($request->hasFile('avatar')) {
             $name = $request->file('avatar');
-            $fileName = 'User_' . time() . '.' . $name->getClientOriginalExtension();
-            $path = Storage::putFileAs('public/images', $request->file('avatar'), $fileName);
-        }
+            $imageName = 'User_' . time() . '.' . $name->getClientOriginalExtension();
+            $path = Storage::putFileAs('public/images/users', $request->file('avatar'), $imageName);
+        }	
+
+
 		// insert data ke table pengguna
 		DB::table('users')->insert([
 			'name_user' => $request->name,
@@ -66,7 +72,7 @@ class UserController extends Controller
 			'password' => Hash::make($request->password),
 			'email' => $request->email,
 			'phone' => $request->telp,
-			// 'avatar' => $fileName->avatar,
+			'avatar' => $imageName,
 		]);
 		// alihkan halaman ke halaman pengguna
 		return redirect('/daftarpengguna');
@@ -76,17 +82,18 @@ class UserController extends Controller
     {
         // mengambil data pengguna berdasarkan id yang dipilih
 		$users = DB::table('users')->where('id', $id)->get();
-
+		$group = DB::table('users_group')->get();
 		// passing data pengguna yang didapat ke view detail.blade.php
-		return view('/TableUser/detail', ['users' => $users]);
+		return view('/TableUser/u_detail', ['users' => $users, 'users_group' => $group]);
     }
 
 	public function edit($id)
 	{
 		// mengambil data pengguna berdasarkan id yang dipilih
 		$users = DB::table('users')->where('id', $id)->get();
+		$group = DB::table('users_group')->get();
 		// passing data pengguna yang didapat ke view edit.blade.php
-		return view('/TableUser/formedit', ['users' => $users]);
+		return view('/TableUser/u_edit', ['users' => $users, 'users_group' => $group]);
 	}
 
 	public function update(Request $request)
@@ -98,7 +105,7 @@ class UserController extends Controller
 			'password' => 'required|min:5',
 			'email' => 'required|email',
 			'telp' => 'required|numeric',
-			// 'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+			'avatar' => 'required|mimes:jpeg,png,jpg,svg',
 		],
 		[
 			'name.required' => 'Nama tidak boleh kosong',
@@ -114,14 +121,22 @@ class UserController extends Controller
 			'email.email' => 'Email tidak valid',
 			'telp.required' => 'Nomor telepon tidak boleh kosong',
 			'telp.numeric' => 'Nomor telepon harus berupa angka',
+			'avatar.required' => 'Avatar tidak boleh kosong',
+			'avatar.mimes' => 'Avatar harus berupa jpeg, png, jpg, atau svg',
 		]
-	);
-
+		);
 		if ($request->hasFile('avatar')) {
-            $name = $request->file('avatar');
-            $fileName = 'User_' . time() . '.' . $name->getClientOriginalExtension();
-            $path = Storage::putFileAs('public/images', $request->file('avatar'), $fileName);
-        }
+
+			// ambil nama file gambar lama dari database
+			$oldImage = DB::table('users')->where('id', $request->id)->value('avatar');
+			// Menghapus file lama dari storage
+			Storage::delete('public/images/users/'. $oldImage);
+			
+			$name = $request->file('avatar');
+			$imageName = 'User_' . time() . '.' . $name->getClientOriginalExtension();
+			Storage::putFileAs('public/images/users', $request->file('avatar'), $imageName);
+
+		}	
 
 		// update data pengguna
 		DB::table('users')->where('id', $request->id)->update([
@@ -131,7 +146,7 @@ class UserController extends Controller
 			'password' => Hash::make($request->password),
 			'email' => $request->email,
 			'phone' => $request->telp,
-			// 'avatar' => $fileName,
+			'avatar' => $imageName,
 		]);
 		// alihkan halaman ke halaman pengguna
 		return redirect('/daftarpengguna');
@@ -139,6 +154,12 @@ class UserController extends Controller
 
 	public function destroy($id)
 	{
+
+		// ambil nama file gambar lama dari database
+		$oldImage = DB::table('users')->where('id', $id)->value('avatar');
+		// Menghapus file lama dari storage
+		Storage::delete('public/images/users/'. $oldImage);
+
 		// menghapus data pengguna berdasarkan id yang dipilih
 		DB::table('users')->where('id', $id)->delete();
 

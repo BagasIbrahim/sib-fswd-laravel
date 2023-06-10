@@ -29,7 +29,7 @@ class CategoriesController extends Controller
     public function create()
     {
             // memanggil view tambah
-            return view('/TableKategori/formtambah');
+            return view('/TableKategori/c_tambah');
     }
 
     /**
@@ -68,7 +68,7 @@ class CategoriesController extends Controller
         // mengambil data categories berdasarkan id yang dipilih
         $categories = DB::table('categories')->where('id', $id)->get();
         // passing data categories yang didapat ke view detail.blade.php
-        return view('/TableKategori/detail', ['categories' => $categories]);
+        return view('/TableKategori/c_detail', ['categories' => $categories]);
     }
 
     /**
@@ -82,7 +82,7 @@ class CategoriesController extends Controller
         // mengambil data categories berdasarkan id yang dipilih
         $categories = DB::table('categories')->where('id', $id)->get();
         // passing data categories yang didapat ke view edit.blade.php
-        return view('/TableKategori/formedit', ['categories' => $categories]);
+        return view('/TableKategori/c_edit', ['categories' => $categories]);
     }
 
     /**
