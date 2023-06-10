@@ -15,7 +15,7 @@
 
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
-    <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/fontawesome.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/all.css')}}">
 
 </head>
 
@@ -26,9 +26,9 @@
             <div class="w-100 d-flex justify-content-between">
                 <div>
                     <i class="fa fa-envelope mx-2"></i>
-                    <a class="navbar-sm-brand text-light text-decoration-none" href="">info@company.com</a>
+                    <a class="navbar-sm-brand text-light text-decoration-none" href="">mycart@company.com</a>
                     <i class="fa fa-phone mx-2"></i>
-                    <a class="navbar-sm-brand text-light text-decoration-none" href="">010-020-0340</a>
+                    <a class="navbar-sm-brand text-light text-decoration-none" href="">0812384312</a>
                 </div>
                 <div>
                     <a class="text-light" href="https://www.facebook.com/profile.php?id=100009399030321" target="_blank" rel="sponsored"><i class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
@@ -47,7 +47,7 @@
         <div class="container d-flex justify-content-between align-items-center">
 
             <a class="navbar-brand text-success logo h1 align-self-center" href="/">
-                Shop
+                MyCart
             </a>
 
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,20 +70,6 @@
                             <a class="nav-link" href="">Contact</a>
                         </li>
                     </ul>
-                </div>
-                <div class="navbar align-self-center d-flex">
-                    <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
-                            <div class="input-group-text">
-                                <i class="fa fa-fw fa-search"></i>
-                            </div>
-                        </div>
-                    
-                    </div>
-                    <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
-                        <i class="fa fa-fw fa-search text-dark mr-2"></i>
-                    </a>
                 </div>
                 <div>
                     <a href="login" class="mx-2 btn" >Login</a>
@@ -204,10 +190,11 @@
                         Explicabo cupiditate cum autem quis dolorum totam maxime neque,
                 </div>
             </div>
+            @foreach ($products as $p)    
             <div class="row">
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
-                        <a href="shop-single.html">
+                        <a href="">
                             <img src="{{asset('vendor/img/product_img_01.jpg')}}" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
@@ -278,6 +265,7 @@
                     </div>
                 </div>
             </div>
+            @endforeach
         </div>
     </section>
     <!-- End Featured Product -->
@@ -297,11 +285,11 @@
                         </li>
                         <li>
                             <i class="fa fa-phone fa-fw"></i>
-                            <a class="text-decoration-none" href="">010-020-0340</a>
+                            <a class="text-decoration-none" href="">0812384312</a>
                         </li>
                         <li>
                             <i class="fa fa-envelope fa-fw"></i>
-                            <a class="text-decoration-none" href="">info@company.com</a>
+                            <a class="text-decoration-none" href="">mycart@company.com</a>
                         </li>
                     </ul>
                 </div>
