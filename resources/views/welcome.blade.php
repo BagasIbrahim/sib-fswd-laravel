@@ -190,7 +190,6 @@
                         Explicabo cupiditate cum autem quis dolorum totam maxime neque,
                 </div>
             </div>
-            @foreach ($products as $p)    
             <div class="row">
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
@@ -265,7 +264,6 @@
                     </div>
                 </div>
             </div>
-            @endforeach
         </div>
     </section>
     <!-- End Featured Product -->
