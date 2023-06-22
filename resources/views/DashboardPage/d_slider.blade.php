@@ -18,7 +18,7 @@
             <h4 class="m-0 font-weight-bold text-primary">Data Tabel Slider</h4>
         </div>
 
-        @if (Auth::user()->role == 'admin')           
+        @if (Auth::user()->role == 'admin'||Auth::user()->role == 'staff')           
         <div>
             <a href="/daftarslider/s_tambah" class="my-2 mx-3 btn btn-primary">Tambah Slider</a>
         </div><br>
@@ -33,6 +33,7 @@
                         <th>Image Product</th>
                         <th>Slider Name</th>
                         <th>Description</th>
+                        <th>Status</th>
                         {{-- <th>Link</th> --}}
                         @if (Auth::user()->role == 'admin')           
                         <th>Aksi</th>
@@ -45,9 +46,9 @@
                                 <td><img style="height: 100px; width: 100px;" src="{{ asset('storage/images/sliders/' . $s->image) }}" alt=""></td>
                                 <td>{{$s->name_slider}}</td>
                                 <td style="width: 25em">{{$s->description}}</td>
-                                {{-- <td>{{$s->link}}</td> --}}
+                                <td>{{$s->status}}</td>
                                 @if (Auth::user()->role == 'admin')           
-                                <td class="actions">
+                                <td class="actions" style="width: 6em">
                                     <a href="/daftarslider/s_detail/{{$s->id}}" class="btn btn-primary btn-sm"><i class="fas fa-info-circle fa-xs"></i></a>
                                     <a href="/daftarslider/s_edit/{{$s->id}}" class="btn btn-success btn-sm"><i class="fas fa-pen fa-xs"></i></a>
                                     <a href="/daftarslider/hapus/{{$s->id}}" class="btn btn-danger btn-sm"><i class="fas fa-trash fa-xs"></i></a>

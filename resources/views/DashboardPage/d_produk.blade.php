@@ -9,7 +9,7 @@
             <h4 class="m-0 font-weight-bold text-primary">Data Tabel Produk</h4>
         </div>
 
-        @if (Auth::user()->role == 'admin')           
+        @if (Auth::user()->role == 'admin'||Auth::user()->role == 'staff')           
         <div>
             <a href="/daftarproduk/p_tambah" class="my-2 mx-3 btn btn-primary">Tambah Produk</a>
         </div><br>
@@ -39,7 +39,7 @@
                                 <td>{{$p->name_category}}</td>
                                 <td>{{$p->name_product}}</td>
                                 <td>{{$p->description}}</td>
-                                <td>{{$p->price}}</td>
+                                <td>RP. {{number_format($p->price, 0)}}</td>
                                 <td>{{$p->status}}</td>
                                 @if (Auth::user()->role == 'admin')           
                                 <td class="actions" style="width: 6em">
