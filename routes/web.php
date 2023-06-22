@@ -55,8 +55,6 @@ Route::get('/', [LandingPageController::class, 'index']);
 Route::middleware('role:admin')->group(function () {
 
     // Route for Slider
-    Route::get('/daftarslider/s_tambah', [SliderController::class, 'create'])->middleware('auth');
-    Route::post('/daftarslider/create', [SliderController::class, 'store'])->middleware('auth');
     Route::get('/daftarslider/s_detail/{id}', [SliderController::class, 'show'])->middleware('auth');
     Route::get('/daftarslider/s_edit/{id}', [SliderController::class, 'edit'])->middleware('auth');
     Route::put('/daftarslider/update', [SliderController::class, 'update'])->middleware('auth');
@@ -71,8 +69,6 @@ Route::middleware('role:admin')->group(function () {
     Route::get('/daftarpengguna/hapus/{id}', [UserController::class, 'destroy'])->middleware('auth');
 
     // Route for CRUD Products
-    Route::get('/daftarproduk/p_tambah', [ProductController::class, 'create'])->middleware('auth');
-    Route::post('/daftarproduk/create', [ProductController::class, 'store'])->middleware('auth');
     Route::get('/daftarproduk/p_detail/{id}', [ProductController::class, 'show'])->middleware('auth');
     Route::get('/daftarproduk/p_edit/{id}', [ProductController::class, 'edit'])->middleware('auth');
     Route::put('/daftarproduk/update', [ProductController::class, 'update'])->middleware('auth');
@@ -100,6 +96,10 @@ Route::middleware('role:admin,staff')->group(function () {
     Route::get('/daftarkategori', [CategoriesController::class, 'index'])->middleware('auth');
     Route::get('/daftargruppengguna', [GroupUserController::class, 'index'])->middleware('auth');
     Route::get('/daftarslider', [SliderController::class, 'index'])->middleware('auth');
+    Route::get('/daftarproduk/p_tambah', [ProductController::class, 'create'])->middleware('auth');
+    Route::post('/daftarproduk/create', [ProductController::class, 'store'])->middleware('auth');
+    Route::get('/daftarslider/s_tambah', [SliderController::class, 'create'])->middleware('auth');
+    Route::post('/daftarslider/create', [SliderController::class, 'store'])->middleware('auth');
 });
 
 
