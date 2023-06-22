@@ -48,7 +48,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="description" class="form-label">Description</label>
-                        <input type="text" class="form-control" id="description" name="description" value="{{$p->description}}" placeholder="Product Description">
+                        <textarea type="text" class="form-control" id="description" name="description" value="{{$p->description}}" placeholder="Product Description">{{$p->description}}</textarea>
                         {{-- - error message untuk description --}}
                         @error('description')
                         <div class="my-2 alert alert-danger">{{ $message }}</div>
@@ -64,7 +64,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="status" class="form-label">Status</label>
-                        <select name="status" class="form-control">
+                        <select name="status" class="form-select">
                             <option value="accepted" {{ $p->status == 'accepted' ? 'selected' : ''}}
                             >Accepted</option>
                             <option value="rejected" {{ $p->status == 'rejected' ? 'selected' : '' }}

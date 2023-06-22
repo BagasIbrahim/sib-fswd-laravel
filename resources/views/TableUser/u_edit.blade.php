@@ -48,7 +48,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="role" class="form-label">Role</label>
-                        <select name="role" class="form-control">
+                        <select name="role" class="form-select">
                             <option value="admin" {{ $u->role == 'admin' ? 'selected' : '' }}
                                                     >Admin</option>
                             <option value="staff" {{ $u->role == 'staff' ? 'selected' : '' }}

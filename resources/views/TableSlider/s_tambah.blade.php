@@ -34,21 +34,29 @@
 
         <div class="col-md-6">
             <label for="description" class="form-label">Description</label>
-            <input type="text" class="form-control" id="description" name="description" placeholder="Slider Description">
+            <textarea type="text" class="form-control" id="description" name="description" placeholder="Slider Description"></textarea>
             {{-- - error message untuk description --}}
             @error('description')
             <div class="my-2 alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
 
-        {{-- <div class="col-md-6">
-            <label for="link" class="form-label">Link Slider</label>
-            <input type="text" class="form-control" id="link" name="link" placeholder="http:://">
-            - error message untuk price
-            @error('link')
+        <div class="col-md-6">
+            <label for="status" class="form-label">Status</label>
+            <select name="status" class="form-select">
+            @if (Auth::user()->role == 'admin')
+            <option value="active">Active</option>
+            @endif
+            @if (Auth::user()->role == 'admin')
+            <option value="expired">Expired</option>
+            @endif
+            <option value="pending">Pending</option>
+            </select>
+            {{-- - error message untuk status --}}
+            @error('status')
             <div class="my-2 alert alert-danger">{{ $message }}</div>
             @enderror
-        </div> --}}
+        </div>
 
         <div class="col-12">
             <label for="image" class="form-label">Images Slider</label>

@@ -38,7 +38,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="description" class="form-label">Description</label>
-                        <input type="text" class="form-control" id="description" name="description" value="{{$p->description}}" placeholder="Product Description">
+                        <textarea type="text" class="form-control" id="description" name="description" value="{{$p->description}}" placeholder="Product Description">{{$p->description}}</textarea>
                     </div>
                     <div class="col-md-6">
                         <label for="price" class="form-label">Price</label>

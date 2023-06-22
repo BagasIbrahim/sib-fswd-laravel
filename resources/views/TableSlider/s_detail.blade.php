@@ -29,13 +29,19 @@
                     </div>
                     <div class="col-md-6">
                         <label for="description" class="form-label">Description</label>
-                        <input type="text" class="form-control" id="description" name="description" value="{{$s->description}}" placeholder="Slider Description">
+                        <textarea type="text" class="form-control" id="description" name="description" value="{{$s->description}}" placeholder="Slider Description">{{$s->description}}</textarea>
                     </div>
-                    {{-- <div class="col-md-6">
-                        <label for="price" class="form-label">Link Slider</label>
-                        <input type="text" class="form-control" id="price" name="price" value="{{$s->link}}" placeholder="">
-                    </div> --}}
-                    
+                    <div class="col-md-6">
+                        <label for="status" class="form-label">Status</label>
+                        <select name="status" class="form-select">
+                            <option value="active" {{ $s->status == 'active' ? 'selected' : ''}}
+                            >Active</option>
+                            <option value="expired" {{ $s->status == 'expired' ? 'selected' : '' }}
+                            >Expired</option>
+                            <option value="pending" {{ $s->status == 'pending' ? 'selected' : '' }}
+                            >Pending</option>
+                        </select>
+                    </div>
                     <div class="col-12">
                         <label for="image" class="form-label d-block">Images Slider</label>
                         @if ($s->image)

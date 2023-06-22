@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+
 
 class SliderController extends Controller
 {
@@ -27,6 +29,7 @@ class SliderController extends Controller
         $request->validate([
             'name_slider' => 'required|string|min:3',
             'description' => 'required',
+            'status' => 'required|in:active,expired,pending',
             'image' => 'required|mimes:jpeg,png,jpg,svg',
         ],
         [
@@ -34,10 +37,21 @@ class SliderController extends Controller
             'name_slider.string' => 'Nama slider harus berupa string',
             'name_slider.min' => 'Nama slider minimal 3 karakter',
             'description.required' => 'deskripsi tidak boleh kosong',
+            'status.required' => 'Status tidak boleh kosong',
+            'status.in' => 'Status harus berupa active, expired, atau pending',
             'image.required' => 'Gambar tidak boleh kosong',
             'image.mimes' => 'Gambar harus berupa jpeg, png, jpg, atau svg',
         ]
     );
+        // Cek jika role staff menambah data produk
+        if(Auth::check()&& Auth::user()->role =="staff"){
+            $status = 'pending';
+        } else{
+            $request->validate([
+                'status' => 'required|in:active,expired,pending',
+            ]);
+            $status = $request->status;
+        }
         // Cek apakah upload file
         if ($request->hasFile('image')) {
             $name = $request->file('image');
@@ -49,6 +63,7 @@ class SliderController extends Controller
         DB::table('slider')->insert([
             'name_slider' => $request->name_slider,
             'description' => $request->description,
+            'status' => $status,
             'image' => $imageName,
         ]);
 
@@ -77,6 +92,7 @@ class SliderController extends Controller
         $request->validate([
             'name_slider' => 'required|string|min:3',
             'description' => 'required',
+            'status' => 'required|in:active,expired,pending',
             'image' => 'required|mimes:jpeg,png,jpg,svg',
         ],
         [
@@ -84,6 +100,8 @@ class SliderController extends Controller
             'name_slider.string' => 'Nama harus berupa string',
             'name_slider.min' => 'Nama minimal 3 karakter',
             'description.required' => 'deskripsi tidak boleh kosong',
+            'status.required' => 'Status tidak boleh kosong',
+            'status.in' => 'Status harus berupa active, expired, atau pending',
             'image.required' => 'Gambar tidak boleh kosong',
             'image.mimes' => 'Gambar harus berupa jpeg, png, jpg, atau svg',
         ]
@@ -104,6 +122,7 @@ class SliderController extends Controller
         DB::table('slider')->where('id', $request->id)->update([
             'name_slider' => $request->name_slider,
             'description' => $request->description,
+            'status' => $request->status,
             'image' => $imageName,
         ]);
 

@@ -34,21 +34,27 @@
                     </div>
                     <div class="col-md-6">
                         <label for="description" class="form-label">Description</label>
-                        <input type="text" class="form-control" id="description" name="description" value="{{$s->description}}" placeholder="Slider Description">
+                        <textarea type="text" class="form-control" id="description" name="description" value="{{$s->description}}" placeholder="Slider Description">{{ $s->description}}</textarea>
                         {{-- - error message untuk description --}}
                         @error('description')
                         <div class="my-2 alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    {{-- <div class="col-md-6">
-                        <label for="price" class="form-label">Link Slider</label>
-                        <input type="text" class="form-control" id="price" name="price" value="{{$s->link}}" placeholder="xxx.xx">
-                        - error message untuk price
-                        @error('link')
+                    <div class="col-md-6">
+                        <label for="status" class="form-label">Status</label>
+                        <select name="status" class="form-select">
+                            <option value="active" {{ $s->status == 'active' ? 'selected' : ''}}
+                            >Active</option>
+                            <option value="expired" {{ $s->status == 'expired' ? 'selected' : '' }}
+                            >Expired</option>
+                            <option value="pending" {{ $s->status == 'pending' ? 'selected' : '' }}
+                            >Pending</option>
+                        </select>
+                        {{-- - error message untuk status --}}
+                        @error('status')
                         <div class="my-2 alert alert-danger">{{ $message }}</div>
                         @enderror
-                    </div> --}}
-                    
+                    </div>
                     <div class="col-12">
                         <label for="image" class="form-label d-block">Images Slider</label>
                         @if ($s->image)

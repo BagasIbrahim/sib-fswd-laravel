@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -50,7 +51,6 @@ class ProductController extends Controller
             'name_product' => 'required|string',
             'description' => 'required',
             'price' => 'required|decimal:2',
-            'status' => 'required|in:accepted,rejected,waiting',
             'created_by' => 'required|integer',
             'verified_by' => 'required|integer',
             'image' => 'required|mimes:jpeg,png,jpg,svg'
@@ -67,13 +67,20 @@ class ProductController extends Controller
             'category_id.integer' => 'Kategori harus berupa angka.',
             'name_product.string' => 'Nama produk harus berupa string.',
             'price.decimal' => 'Harga harus berupa angka.',
-            'status.in' => 'Status harus berupa accepted, rejected, atau waiting.',
             'created_by.integer' => 'created_by harus berupa angka.',
             'verified_by.integer' => 'verified_by harus berupa angka.',
             'image.mimes' => 'Gambar harus berupa jpeg, png, jpg, atau svg.',
         ]      
     );
-
+        // Cek jika role staff menambah data produk
+        if(Auth::check()&& Auth::user()->role =="staff"){
+            $status = 'waiting';
+        } else{
+            $request->validate([
+                'status' => 'required|in:accepted,rejected,waiting',
+            ]);
+            $status = $request->status;
+        }
         // Cek apakah upload file
         if ($request->hasFile('image')) {
             $name = $request->file('image');
@@ -87,7 +94,7 @@ class ProductController extends Controller
             'name_product' => $request->name_product,
             'description' => $request->description,
             'price' => $request->price,
-            'status' => $request->status,
+            'status' => $status,
             'created_by' => $request->created_by,
             'verified_by' => $request->verified_by,
             'image' => $imageName
